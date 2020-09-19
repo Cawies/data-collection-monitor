@@ -14,31 +14,32 @@ import requests
 # Internal modules
 from config import config
 from processing.data_management import load_dataset, fetch_data_from_api
+from layout import create_header, map_and_four_boxes
 
 
 
 app = dash.Dash(
-	__name__, meta_tags=[
-		{
-			'name': 'viewport', 
-			'content': 'width=device-width'
-		}
-	]
+    __name__, meta_tags=[{"name": "viewport", "content": "width=device-width"}]
 )
-
 server = app.server
 
 
+
 def serve_layout():
-	df = load_dataset(file_name=config.DATA_FILE)
+	#df = load_dataset(file_name=config.DATA_FILE)
 
 	return html.Div(
 		[
-			dcc.Store(id="json_storage")
-			html.Div(id='output-clientside') # Empty div to trigger clientside javascript
-			create_header(app, df)
-		]
+			dcc.Store(id="memory"),
+			html.Div(id='output-clientside'), # Empty div to trigger clientside javascript
+			create_header(app),
+			map_and_four_boxes(app)
+		],
+		id='main-container',
+		style={'display': 'flex', 'flex-direction': 'columns'}
 	)
+
+app.layout = serve_layout
 
 
 if __name__ == "__main__":

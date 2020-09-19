@@ -34,7 +34,7 @@ def create_header(app):
                         html.Div(
                             [
                                 html.H3(
-                                    config.DASHBOARD_TITLE,
+                                    'Title',
                                     style={"margin-bottom": "0px"},
                                 ),
                                 html.H5(
@@ -61,4 +61,56 @@ def create_header(app):
             id="header",
             className="row flex-display",
             style={"margin-bottom": "25px"},
+        )
+
+
+def map_and_four_boxes(app):
+        return html.Div(
+            [
+                html.Div(
+                        dcc.Graph(id = 'map',figure = None, className="dcc_control"),
+
+                    className="pretty_container four columns",
+                    id="cross-filter-options",
+                ),
+                html.Div(
+                    [
+                        html.Div(
+                            [
+                                html.Div(
+                                    [html.H6(id="tot_interviews"), html.P("Total interviews"), html.H4('1')],
+                                    id="box-1",
+                                    className="mini_container",
+                                ),
+                                html.Div(
+                                    [html.H6(id="duplicated_id"), html.P("Duplicated ID"), html.H4('2')],
+                                    id="box-2",
+                                    className="mini_container",
+                                ),
+                                html.Div(
+                                    [html.H6(id="end_before_start"), html.P("Total flags"), html.H4('3')],
+                                    id="box-3",
+                                    className="mini_container",
+                                ),
+                                html.Div(
+                                    [html.H6(id="avg_interview_duration"), html.P("Avg. interview duration (min)"), html.H4('4')],
+                                    id="water",
+                                    className="mini_container",
+                                ),
+                            ],
+                            id="info-container",
+                            className="row container-display",
+                        ),
+                        html.Div(
+                            children = [
+
+                            dcc.Graph(id="interview-count", figure=None)],
+                            className="pretty_container"
+                        ),
+                    ],
+                    id="right-column",
+                    className="eight columns",
+                ),
+            ],
+            className="row flex-display",
         )

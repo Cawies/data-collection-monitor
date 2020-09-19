@@ -22,6 +22,12 @@ def fetch_data_from_api(url, token):
     print(datetime.datetime.now())
     return pd.read_json(response.text)
 
+def load_geojson(*, file_name: str):
+    with open(f"{config.DATASET_DIR}/{file_name}") as f:
+        geojson = json.load(f)
+
+        return geojson
+
 
 
 
